@@ -15,4 +15,8 @@ html, body {
   height: 670px;
   background: linear-gradient(to top left, #e5274d -3%, red 250%);
   opacity: 0.9;
+  background-image: url(../images/chick.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center; 
 }
