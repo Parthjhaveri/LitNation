@@ -13,7 +13,7 @@ var Home = React.createClass({
   getInitialState() {
   	
   	return {albums: [], artists: [], tracks: [], nasPic: "", futurePic: "", migosPic: "", drakePic: "",
-  			kendrickPic: "", raePic: "", world: ""
+  			kendrickPic: "", raePic: "", world: "", futureSng: "", migosSng: "", drakeSng: ""
   	}
 
   },
@@ -32,6 +32,63 @@ var Home = React.createClass({
   			console.log(worldIsYours)
 
   			thatt.setState({world: worldIsYours})
+  		}
+  	})
+
+  },
+
+  // CLICK TO PLAY THE FUTURE SONG
+  playFuture() {
+
+  	var thattt = this;
+
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=artist:future&type=track',
+  		success: function(songData) {
+  			// console.log(songData.tracks.items[0].preview_url)
+
+  			var futSong = songData.tracks.items[0].preview_url
+  			console.log(futSong)
+
+  			thattt.setState({futureSng: futSong})
+  		}
+  	})
+
+  },
+
+  // CLICK TO PLAY THE FUTURE SONG
+  playMigos() {
+
+  	var thatMigos = this;
+
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=artist:migos&type=track',
+  		success: function(songData) {
+  			// console.log(songData.tracks.items[0].preview_url)
+
+  			var migosSong = songData.tracks.items[0].preview_url
+  			console.log(migosSong)
+
+  			thatMigos.setState({migosSng: migosSong})
+  		}
+  	})
+
+  },
+
+  // CLICK TO PLAY THE FUTURE SONG
+  playDrake() {
+
+  	var thatDrake = this;
+
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=artist:drake&type=track',
+  		success: function(songData) {
+  			// console.log(songData.tracks.items[0].preview_url)
+
+  			var drakeSong = songData.tracks.items[0].preview_url
+  			console.log(drakeSong)
+
+  			thatDrake.setState({drakeSng: drakeSong})
   		}
   	})
 
@@ -230,11 +287,11 @@ var Home = React.createClass({
 					  		</div>
 
 					  		<div className="boxmiddle">
-					  			<img src={this.state.futurePic} id="future"/>
+					  			<img src={this.state.futurePic} id="future" onClick={this.playFuture}/>
 					  		</div>
 					  
 					  		<div className="boxright">
-					  			<img src={this.state.migosPic} id="migos"/>
+					  			<img src={this.state.migosPic} id="migos" onClick={this.playMigos}/>
 					  		</div>
 
 					  		{
@@ -242,7 +299,7 @@ var Home = React.createClass({
 					  		}
 
 					  		<div className="boxleft">
-					  			<img src={this.state.drakePic} id="drake"/>
+					  			<img src={this.state.drakePic} id="drake" onClick={this.playDrake}/>
 					  		</div>
 
 					  		<div className="boxmiddle">
@@ -260,7 +317,23 @@ var Home = React.createClass({
 	        		<ReactAudioPlayer
 					  src={this.state.world}
 					  autoPlay
+					  className="player"
 					/>
+					<ReactAudioPlayer
+					  src={this.state.futureSng}
+					  autoPlay
+					  className="player"
+					/>
+					<ReactAudioPlayer
+					  src={this.state.migosSng}
+					  autoPlay
+					  className="player"
+					/>
+					<ReactAudioPlayer
+					  src={this.state.drakeSng}
+					  autoPlay
+					  className="player"
+					/>					
 
 	        	</div>
 

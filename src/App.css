@@ -329,7 +329,9 @@ html, body {
   height: 100%;
 }
 
-
+.player {
+  display: none;
+}
 
 
 
