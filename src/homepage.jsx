@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 const $ = require('jquery');
 import CSS from './App.css';
 import Navi from './navbar.jsx';
+import ReactAudioPlayer from 'react-audio-player';
 
 import { IndexRoute,Link, Router, Route, browserHistory } from 'react-router';
 
@@ -12,8 +13,27 @@ var Home = React.createClass({
   getInitialState() {
   	
   	return {albums: [], artists: [], tracks: [], nasPic: "", futurePic: "", migosPic: "", drakePic: "",
-  			kendrickPic: "", raePic: ""
+  			kendrickPic: "", raePic: "", world: ""
   	}
+
+  },
+
+  // CLICK TO PLAY THE NAS SONG
+  playNas() {
+
+  	var thatt = this;
+
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=artist:nas&type=track',
+  		success: function(songData) {
+  			// console.log(songData.tracks.items[0].preview_url)
+
+  			var worldIsYours = songData.tracks.items[0].preview_url;
+  			console.log(worldIsYours)
+
+  			thatt.setState({world: worldIsYours})
+  		}
+  	})
 
   },
   
@@ -126,13 +146,13 @@ var Home = React.createClass({
 	  			// console.log(data.albums.items[1].images[1])
 
 	  			const kendrickCoverPic = data.albums.items[1].images[1].url
-	  			console.log(kendrickCoverPic)
+	  			// console.log(kendrickCoverPic)
 
 	  			that.setState({kendrickPic: kendrickCoverPic})
 	  		}
 	  	})
 	  	// LOG NAS PIC STATE
-	  	console.log("Kendrick Picture: ", this.state.kendrickPic)
+	  	// console.log("Kendrick Picture: ", this.state.kendrickPic)
 
 	  	// AJAX CALL TO GET RAE SREMMURD PIC--------------------------------------------------
 		var that = this;
@@ -143,13 +163,13 @@ var Home = React.createClass({
 	  			// console.log(data.albums.items[1].images[1])
 
 	  			const raeCoverPic = data.albums.items[1].images[1].url
-	  			console.log(raeCoverPic)
+	  			// console.log(raeCoverPic)
 
 	  			that.setState({raePic: raeCoverPic})
 	  		}
 	  	})
 	  	// LOG NAS PIC STATE
-	  	console.log("Rae Picture: ", this.state.raePic)
+	  	// console.log("Rae Picture: ", this.state.raePic)
 
   },
 
@@ -206,7 +226,7 @@ var Home = React.createClass({
 	        				}
 
 					  		<div className="boxleft">
-					  			<img src={this.state.nasPic} id="nas"/>
+					  			<img src={this.state.nasPic} id="nas" onClick={this.playNas} />
 					  		</div>
 
 					  		<div className="boxmiddle">
@@ -236,6 +256,11 @@ var Home = React.createClass({
 	        			</center>
 
 	        		</div>
+
+	        		<ReactAudioPlayer
+					  src={this.state.world}
+					  autoPlay
+					/>
 
 	        	</div>
 

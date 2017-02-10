@@ -184,6 +184,23 @@ html, body {
   border-bottom-style: dotted;
 }
 
+@media only screen and (max-width: 900px) {
+  
+  .navlistitem {
+    margin-top: -50%;
+    width: 100%;
+    background-color: white;
+    color: black;
+    display: none;
+
+  }
+
+  .appnav {
+    color: black;
+  }
+
+}
+
 #phone {
   width: 450px;
   height: 500px
@@ -257,6 +274,18 @@ html, body {
   margin-left: -3px;
   margin-right: 2px;
   overflow: hidden;
+}
+
+.boxleft:hover {
+  opacity: 0.9;
+}
+
+.boxright:hover {
+  opacity: 0.9;
+}
+
+.boxmiddle:hover {
+  opacity: 0.9;
 }
 
 
