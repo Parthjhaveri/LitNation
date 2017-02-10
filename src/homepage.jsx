@@ -10,7 +10,11 @@ var Home = React.createClass({
 
   // GET THE INITIAL STATE
   getInitialState() {
-  	return {albums: [], artists: [], tracks: [], nasPic: "", futurePic: "", migosPic: ""}
+  	
+  	return {albums: [], artists: [], tracks: [], nasPic: "", futurePic: "", migosPic: "", drakePic: "",
+  			kendrickPic: "", raePic: ""
+  	}
+
   },
   
   componentDidMount() {
@@ -86,13 +90,66 @@ var Home = React.createClass({
 	  			// console.log(data.albums.items[1].images[1])
 
 	  			const migosCoverPic = data.albums.items[1].images[1].url
-	  			console.log(migosCoverPic)
+	  			// console.log(migosCoverPic)
 
 	  			that.setState({migosPic: migosCoverPic})
 	  		}
 	  	})
 	  	// LOG NAS PIC STATE
-	  	console.log("Migos Picture: ", this.state.migosPic)
+	  	// console.log("Migos Picture: ", this.state.migosPic)
+
+
+	  	// AJAX CALL TO GET DRAKE PIC--------------------------------------------------
+		var that = this;
+
+	  	$.ajax({
+	  		url: 'https://api.spotify.com/v1/search?q=artist:drake&type=album',
+	  		success: function(data) {
+	  			// console.log(data.albums.items[1].images[1])
+
+	  			const drakeCoverPic = data.albums.items[1].images[1].url
+	  			// console.log(drakeCoverPic)
+
+	  			that.setState({drakePic: drakeCoverPic})
+	  		}
+	  	})
+	  	// LOG NAS PIC STATE
+	  	// console.log("Drake Picture: ", this.state.drakePic)
+
+
+	  	// AJAX CALL TO GET KENDRICK PIC--------------------------------------------------
+		var that = this;
+
+	  	$.ajax({
+	  		url: 'https://api.spotify.com/v1/search?q=artist:kendrick&type=album',
+	  		success: function(data) {
+	  			// console.log(data.albums.items[1].images[1])
+
+	  			const kendrickCoverPic = data.albums.items[1].images[1].url
+	  			console.log(kendrickCoverPic)
+
+	  			that.setState({kendrickPic: kendrickCoverPic})
+	  		}
+	  	})
+	  	// LOG NAS PIC STATE
+	  	console.log("Kendrick Picture: ", this.state.kendrickPic)
+
+	  	// AJAX CALL TO GET RAE SREMMURD PIC--------------------------------------------------
+		var that = this;
+
+	  	$.ajax({
+	  		url: 'https://api.spotify.com/v1/search?q=artist:rae&type=album',
+	  		success: function(data) {
+	  			// console.log(data.albums.items[1].images[1])
+
+	  			const raeCoverPic = data.albums.items[1].images[1].url
+	  			console.log(raeCoverPic)
+
+	  			that.setState({raePic: raeCoverPic})
+	  		}
+	  	})
+	  	// LOG NAS PIC STATE
+	  	console.log("Rae Picture: ", this.state.raePic)
 
   },
 
@@ -149,15 +206,15 @@ var Home = React.createClass({
 	        				}
 
 					  		<div className="boxleft">
-					  			<img src={this.state.nasPic}/>
+					  			<img src={this.state.nasPic} id="nas"/>
 					  		</div>
 
 					  		<div className="boxmiddle">
-					  			<img src={this.state.futurePic}/>
+					  			<img src={this.state.futurePic} id="future"/>
 					  		</div>
 					  
 					  		<div className="boxright">
-					  			<img src={this.state.migosPic}/>
+					  			<img src={this.state.migosPic} id="migos"/>
 					  		</div>
 
 					  		{
@@ -165,15 +222,15 @@ var Home = React.createClass({
 					  		}
 
 					  		<div className="boxleft">
-
+					  			<img src={this.state.drakePic} id="drake"/>
 					  		</div>
 
 					  		<div className="boxmiddle">
-
+					  			<img src={this.state.kendrickPic} id="drake"/>
 					  		</div>
 					  
 					  		<div className="boxright">
-
+					  			<img src={this.state.raePic} id="drake"/>
 					  		</div>
 							
 	        			</center>
