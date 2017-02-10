@@ -227,23 +227,36 @@ html, body {
 }
 
 .boxleft {
-  width: 35%;
+  width: 33%;
   height: 300px;
   border: 1px solid white;
   display: inline-block;
   margin-top: -6px;
   margin-left: -3px;
   margin-right: 2px;
+  overflow: hidden;
 }
 
 .boxright {
-  width: 35%;
+  width: 33%;
   height: 300px;
   border: 1px solid white;
   display: inline-block;
   margin-top: -6px;
   margin-left: -3px;
   margin-right: 2px;
+  overflow: hidden;
+}
+
+.boxmiddle {
+  width: 33%;
+  height: 300px;
+  border: 1px solid white;
+  display: inline-block;
+  margin-top: -6px;
+  margin-left: -3px;
+  margin-right: 2px;
+  overflow: hidden;
 }
 
 
@@ -255,6 +268,11 @@ html, body {
   }
 
   .boxright {
+    width: 100%;
+    display: block;
+  }
+
+   .boxmiddle{
     width: 100%;
     display: block;
   }

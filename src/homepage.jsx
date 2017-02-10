@@ -1,15 +1,21 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var $ = require('jquery');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const $ = require('jquery');
 import CSS from './App.css';
 import Navi from './navbar.jsx';
 
 import { IndexRoute,Link, Router, Route, browserHistory } from 'react-router';
 
 var Home = React.createClass({
+
+  // GET THE INITIAL STATE
+  getInitialState() {
+  	return {albums: [], artists: [], tracks: [], nasPic: "", futurePic: "", migosPic: ""}
+  },
   
   componentDidMount() {
 
+  		// NAVBAR CHANGE COLOR
 		window.onscroll = function() {
 			myFunction()
 		};
@@ -25,7 +31,7 @@ var Home = React.createClass({
 		        $('.navlistitem').css({'color':'black'})
 		    } 
 
-		    // IF YOU SCROLL UP, CHANGE IT BACK TO TRANSPARENT
+		    // IF YOU SCROLL UP , CHANGE IT BACK TO TRANSPARENT
 		    else if (document.body.scrollTop < 500) {
 		        var navbar = document.getElementsByClassName("navi");
 		        console.log(navbar)
@@ -36,7 +42,58 @@ var Home = React.createClass({
 
 		}
 
-		// return navbar;
+		// AJAX CALL TO GET NAS PIC--------------------------------------------------
+		var that = this;
+
+	  	$.ajax({
+	  		url: 'https://api.spotify.com/v1/search?q=artist:nas&type=album',
+	  		success: function(data) {
+	  			// console.log(data.albums.items[1].images[1])
+
+	  			const nasCoverPic = data.albums.items[1].images[1].url
+	  			// console.log(nasCoverPic)
+
+	  			that.setState({nasPic: nasCoverPic})
+	  		}
+	  	})
+	  	// LOG NAS PIC STATE
+	  	// console.log("Nas Picture: ", this.state.nasPic)
+
+
+		// AJAX CALL TO GET FUTURE PIC--------------------------------------------------
+		var that = this;
+
+	  	$.ajax({
+	  		url: 'https://api.spotify.com/v1/search?q=artist:future&type=album',
+	  		success: function(data) {
+	  			// console.log(data.albums.items[1].images[1])
+
+	  			const futureCoverPic = data.albums.items[1].images[1].url
+	  			// console.log(futureCoverPic)
+
+	  			that.setState({futurePic: futureCoverPic})
+	  		}
+	  	})
+	  	// LOG NAS PIC STATE
+	  	// console.log("Future Picture: ", this.state.futurePic)
+
+	  	// AJAX CALL TO GET MIGOS PIC--------------------------------------------------
+		var that = this;
+
+	  	$.ajax({
+	  		url: 'https://api.spotify.com/v1/search?q=artist:migos&type=album',
+	  		success: function(data) {
+	  			// console.log(data.albums.items[1].images[1])
+
+	  			const migosCoverPic = data.albums.items[1].images[1].url
+	  			console.log(migosCoverPic)
+
+	  			that.setState({migosPic: migosCoverPic})
+	  		}
+	  	})
+	  	// LOG NAS PIC STATE
+	  	console.log("Migos Picture: ", this.state.migosPic)
+
   },
 
   render: function() {
@@ -87,19 +144,33 @@ var Home = React.createClass({
 	        			
 	        			<center>
 	        				
-					  		<div className="boxleft">
+	        				{
+	        				    // TOP THREE BOXES-------------------------------
+	        				}
 
+					  		<div className="boxleft">
+					  			<img src={this.state.nasPic}/>
 					  		</div>
-					  
+
+					  		<div className="boxmiddle">
+					  			<img src={this.state.futurePic}/>
+					  		</div>
 					  
 					  		<div className="boxright">
-
+					  			<img src={this.state.migosPic}/>
 					  		</div>
+
+					  		{
+					  			// BOTTOM THREE BOXES-------------------------------
+					  		}
 
 					  		<div className="boxleft">
 
 					  		</div>
-					  
+
+					  		<div className="boxmiddle">
+
+					  		</div>
 					  
 					  		<div className="boxright">
 
@@ -117,3 +188,21 @@ var Home = React.createClass({
 })
 
 export default Home;
+
+
+{
+
+	// FUNCTIONALITY PSEUDO-CODE:
+
+	// 1.) ALLOW THE USER TO ENTER AN ARTIST NAME
+
+	// 2.) GO TO SPOTIFY AND GET THOSE ARTISTS, AND GET ALBUMS BY THOSE ARTISTS
+
+	// 3.) GET TRACKS USING THE ALBUMS TRACKS ENDPOINT
+
+
+}
+
+
+
+
