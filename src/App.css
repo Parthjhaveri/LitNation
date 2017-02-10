@@ -1,22 +1,263 @@
 html, body {
   margin: 0px;
   padding: 0px;
+  overflow-x: hidden;
 }
 
 .appnav {
   width: auto;
-  height: 60px;
-  background: linear-gradient(to left, #e5274d -3%, red 220%);
-  opacity: 0.9;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /*background: linear-gradient(to left, #1a1a1a -3%, white 280%);*/
+  background-color: unset;
+  /*opacity: 0.6;*/
+  color: white;
 }
 
 .homepage {
   width: auto;
   height: 670px;
-  background: linear-gradient(to top left, #e5274d -3%, red 250%);
-  opacity: 0.9;
-  background-image: url(../images/chick.jpg);
+  /*background-color: #1a1a1a;*/
+  background: linear-gradient( rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85) ), url(../images/litred.jpg);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center center; 
+  /*font-family: 'Pontano Sans', sans-serif;*/
+  font-family: 'Roboto', sans-serif;
+  padding-top: 200px;
+  padding-bottom: 20px;
+  color: #f90971;
+  font-size: 80px;
+  font-weight: bolder;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-attachment: fixed;
+}
+
+@media only screen and (max-width: 1200px) {
+
+  .homepage {
+    background: linear-gradient( rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85) );
+    opacity: 1;
+  }
+
+}
+
+.heading {
+  letter-spacing: 10px;
+}
+
+#nation {
+  color: white;
+  margin-left: 20px;
+
+}
+
+#logo {
+  color: #f90949;
+  font-size: 50px;
+  display: inline-block;
+  float: left;
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+}
+
+#subheading {
+  font-size: 20px;
+  letter-spacing: 5px;
+  margin-bottom: -25px;
+}
+
+.login {
+  width: 110px;
+  height: 40px;
+  background-color: unset;
+  border: 1px solid white;
+  border-radius: 5px;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  color: #f90971;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.signup {
+  width: 110px;
+  height: 40px;
+  background-color: unset;
+  border: 1px solid white;
+  border-radius: 5px;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  color: #f90971;
+  margin-left: 20px;
+  margin-right: 20px; 
+}
+
+.login:hover {
+  cursor: pointer;
+}
+
+.signup:hover {
+  cursor: pointer;
+}
+
+#arr {
+  margin-top: 13%;
+  color: white;
+  font-size: 30px;
+  -webkit-animation: arrbounce 7s infinite; 
+  animation: arrbounce 7s infinite;
+}
+
+@-webkit-keyframes arrbounce {
+    0%   {font-size: 40px;}
+    15%  {font-size: 30px;}
+    30%  {font-size: 40px;}
+    45%  {font-size: 30px;}
+    60%  {font-size: 40px;}
+    75%  {font-size: 30px;}
+    100% {font-size: 40px;}
+}
+
+
+
+
+@media only screen and (max-width: 500px) {
+
+  .homepage {
+    background: #1a1a1a;
+    font-size: 70px;
+  }
+
+  .appnav {
+    background: #1a1a1a;
+  }
+
+  .signup {
+    width: 100px;
+    height: 35px;
+  }
+   .login {
+    width: 100px;
+    height: 35px;
+  }
+
+}
+
+.info {
+  width: auto;
+  height: auto;
+  padding-top: 150px;
+  padding-bottom: 140px;
+  /*background-color: #0979f9;*/
+  background-color: #f90949;
+  box-sizing: border-box;
+}
+
+.navul {
+  list-style: none;
+  float: right;
+}
+
+.navlistitem {
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 14px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  transition: 0.5s;
+  border: 1px solid transparent;
+  border-bottom-width: 0px;
+}
+
+.navlistitem:hover {
+  border-bottom-color: #f90971;
+  border-bottom-width: 1px;
+  cursor: pointer;
+  transition: 0.5s;
+  border-bottom-style: dotted;
+}
+
+#phone {
+  width: 450px;
+  height: 500px
+}
+
+#rightbox {
+  padding-top: 5%;
+  padding-bottom: 30px;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+#infodesc {
+  font-size: 50px;
+  font-weight: bolder;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.forfree {
+  color: #1a1a1a;
+  font-size: 70px;
+}
+
+#freehr {
+  width: 100%;
+  border-color: black;
+  border-width: 1px;
+}
+
+#cell {
+  margin-left: 10px;
+}
+
+.featuredsongs {
+  width: auto;
+  height: auto;
+  background-color: #1a1a1a;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.boxleft {
+  width: 35%;
+  height: 300px;
+  border: 1px solid white;
+  display: inline-block;
+  margin-top: -6px;
+  margin-left: -3px;
+  margin-right: 2px;
+}
+
+.boxright {
+  width: 35%;
+  height: 300px;
+  border: 1px solid white;
+  display: inline-block;
+  margin-top: -6px;
+  margin-left: -3px;
+  margin-right: 2px;
+}
+
+
+@media only screen and (max-width: 900px) {
+  
+  .boxleft {
+    width: 100%;
+    display: block;
+  }
+
+  .boxright {
+    width: 100%;
+    display: block;
+  }
+
+
 }
