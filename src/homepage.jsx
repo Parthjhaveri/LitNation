@@ -13,7 +13,8 @@ var Home = React.createClass({
   getInitialState() {
   	
   	return {albums: [], artists: [], tracks: [], nasPic: "", futurePic: "", migosPic: "", drakePic: "",
-  			kendrickPic: "", raePic: "", world: "", futureSng: "", migosSng: "", drakeSng: ""
+  			kendrickPic: "", raePic: "", world: "", futureSng: "", migosSng: "", drakeSng: "", kendrickSng: "",
+  			raeSng: ""
   	}
 
   },
@@ -89,6 +90,44 @@ var Home = React.createClass({
   			console.log(drakeSong)
 
   			thatDrake.setState({drakeSng: drakeSong})
+  		}
+  	})
+
+  },
+
+  // CLICK TO PLAY THE FUTURE SONG
+  playKend() {
+
+  	var thatKend = this;
+
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=artist:kendrick&type=track',
+  		success: function(songData) {
+  			// console.log(songData.tracks.items[0].preview_url)
+
+  			var kendrickSong = songData.tracks.items[0].preview_url
+  			console.log(kendrickSong)
+
+  			thatKend.setState({kendrickSng: kendrickSong})
+  		}
+  	})
+
+  },
+
+  // CLICK TO PLAY THE FUTURE SONG
+  playRae() {
+
+  	var thatRae = this;
+
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=artist:rae&type=track',
+  		success: function(songData) {
+  			// console.log(songData.tracks.items[0].preview_url)
+
+  			var raeSong = songData.tracks.items[0].preview_url
+  			console.log(raeSong)
+
+  			thatRae.setState({raeSng: raeSong})
   		}
   	})
 
@@ -303,11 +342,11 @@ var Home = React.createClass({
 					  		</div>
 
 					  		<div className="boxmiddle">
-					  			<img src={this.state.kendrickPic} id="drake"/>
+					  			<img src={this.state.kendrickPic} id="kendrick" onClick={this.playKend}/>
 					  		</div>
 					  
 					  		<div className="boxright">
-					  			<img src={this.state.raePic} id="drake"/>
+					  			<img src={this.state.raePic} id="rae" onClick={this.playRae}/>
 					  		</div>
 							
 	        			</center>
@@ -333,7 +372,17 @@ var Home = React.createClass({
 					  src={this.state.drakeSng}
 					  autoPlay
 					  className="player"
-					/>					
+					/>
+					<ReactAudioPlayer
+					  src={this.state.kendrickSng}
+					  autoPlay
+					  className="player"
+					/>
+					<ReactAudioPlayer
+					  src={this.state.raeSng}
+					  autoPlay
+					  className="player"
+					/>
 
 	        	</div>
 
