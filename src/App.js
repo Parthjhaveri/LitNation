@@ -5,6 +5,7 @@ import CSS from './App.css';
 import { IndexRoute,Link, Router, Route, browserHistory } from 'react-router';
 import Navi from './navbar.jsx'
 import Home from './homepage.jsx'
+import Foot from './footer.jsx'
 
 {
 	// CLIEND ID = 04b9165d42db466790a2e0ba5f9566e0
@@ -19,6 +20,7 @@ var Parent = React.createClass({
       <div>
         <Navi />
         <Home />
+        <Foot />
       </div>
     )
   }

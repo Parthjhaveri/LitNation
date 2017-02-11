@@ -147,8 +147,9 @@ var Home = React.createClass({
 		        var navbar = document.getElementsByClassName("navi");
 		        console.log(navbar)
 
-		        $('.appnav').css({'background-color':'white', 'height':'80px', 'color':'black', 'opacity':'0.9'})
+		        $('.appnav').css({'background-color':'white', 'height':'60px', 'color':'black', 'opacity':'0.9'})
 		        $('.navlistitem').css({'color':'black'})
+		        $('#logo').css({'margin-top':'-15px'})
 		    } 
 
 		    // IF YOU SCROLL UP , CHANGE IT BACK TO TRANSPARENT
@@ -156,7 +157,7 @@ var Home = React.createClass({
 		        var navbar = document.getElementsByClassName("navi");
 		        console.log(navbar)
 
-		        $('.appnav').css({'background-color':'unset', 'height':'80px', 'color':'white', 'opacity':'inherit'})
+		        $('.appnav').css({'background-color':'unset', 'height':'60px', 'color':'white', 'opacity':'inherit'})
 		        $('.navlistitem').css({'color':'white'})
 		    }	   
 
@@ -384,6 +385,43 @@ var Home = React.createClass({
 					  className="player"
 					/>
 
+	        	</div>
+
+	        	{
+	        		// CREATE YOUR OWN PLAYLISTS
+	        	}
+
+	        	<div className="createplaylistdiv">
+	        		<center>
+	        			<p id="createheading">
+	        				Create your own playlists
+	        				<br />
+	        			</p>
+	        				<span className="glyphicon glyphicon-headphones" id="headphones"></span>
+	        				<br />
+	        				<br />
+	        				<div className="row">
+							  
+							  <div className="col-md-6">
+							  	<p id="lefttext">
+							  		Find your favorite Artist, get their Albums and create your playlists.
+							  		Get all the hottest tracks! 
+							  	</p>
+							  </div>
+							  
+							  <div className="col-md-6">
+							  	<p id="lefttext">
+							  		All you need, is a Spotify account!
+							  		<br />
+							  		Go to Spotify<a href="https://www.spotify.com/us/">
+							  		<i className="fa fa-spotify" aria-hidden="true" id="spotlogo"></i>
+							  		</a>
+							  	</p>
+							  </div>
+
+							</div>
+
+	        		</center>
 	        	</div>
 
       </div>

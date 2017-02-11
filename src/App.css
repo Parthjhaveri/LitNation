@@ -277,15 +277,15 @@ html, body {
 }
 
 .boxleft:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .boxright:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .boxmiddle:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 
@@ -343,7 +343,73 @@ html, body {
   display: none;
 }
 
+.createplaylistdiv {
+  width: auto;
+  height: auto;
+  background-color: white;
+  color: #1a1a1a;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
 
+#createheading {
+  font-size: 50px;
+  font-family: 'Roboto', sans-serif;
+}
 
+#headphones {
+  font-size: 70px;
+  margin-top: 3%;
+}
 
+#lefttext {
+  font-size: 35px;
+  font-family: 'Roboto', sans-serif;
+  color: #1a1a1a;
+  font-weight: bolder;
+}
 
+#spotlogo {
+  margin-left: 20px;
+  color: black;
+}
+
+#spotlogo:hover {
+  color: black;
+  font-size: 40px;
+}
+
+.foot {
+  width: auto;
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: black;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  font-size: 40px;
+}
+
+#logofoot {
+  color: white;
+  font-size: 70px;
+  display: inline-block;
+  /*float: left;*/
+}
+
+#aboutdev {
+  display: inline-block;
+}
+
+#aboutdevlink {
+  color: white;
+  text-decoration: none;
+}
+
+#aboutdevlink:hover {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+}
