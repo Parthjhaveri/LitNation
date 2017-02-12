@@ -33,8 +33,15 @@ var Playlists = React.createClass({
   	$.ajax({
   		url: 'https://api.spotify.com/v1/search?q=' + artistInput + ':nas&type=track',
   		success: function(data) {
-  			console.log(data.tracks)
+  			
+  			console.log(data.tracks.items.map(function(key,val) {
+  				// return that.state.artistInfo.concat(key.name)
+  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name)}));
+  			}))
 
+  			console.log(that.state.artistInfo)
+
+  			// ERROR HANDLING
   			if (data.tracks.total === 0) {
   				
   				var error = "Invalid entry, try again!";
@@ -64,7 +71,7 @@ var Playlists = React.createClass({
 						  	<br/>
 						  	<br />
 						  	<p id="error">{this.state.invalidEntry}</p>
-						  	
+
 					  		<p id="insts">Enter an Artist name and select a song to listen to!</p>
 					  	<p id="insts">Filter your selections to get the latest tracks</p>
 					  </div>
@@ -72,10 +79,16 @@ var Playlists = React.createClass({
 					  <div className="col-md-6">
 					  	<div className="trackstable">
 
-					  	<h1>Artist: </h1>
+					  	<h1 className="title">Artist: </h1>
+					  	<hr id="boxhr" />
+					  	<h1 className="title">Tracks available: </h1>
 					  		<center>
 					  			<ul className="tracksul">
-
+					  				{
+					  					this.state.artistInfo.map(function (key,val) {
+											return (<li id="songname" key={key} value={val}>{key}</li>)
+										})		
+					  				}
 					  			</ul>
 					  		</center>
 					  	</div>

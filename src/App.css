@@ -475,7 +475,7 @@ button:focus {
 
 .trackstable {
   width: 95%;
-  height: 500px;
+  height: auto;
   border: 1px solid white;
   border-radius: 5px;
   background-color: #1a1a1a;
@@ -489,6 +489,7 @@ button:focus {
 
 .tracksul {
   list-style: none;
+  text-align: left;
 }
 
 #error {
@@ -498,4 +499,18 @@ button:focus {
   margin-bottom: -20px;
   color: red;
   font-weight: bolder;
+}
+
+#songname {
+  margin-top: 10px;
+}
+
+#boxhr {
+  width: 100%;
+  border-color: white;
+  border-width: 1px;
+}
+
+.title {
+  color: red;
 }
