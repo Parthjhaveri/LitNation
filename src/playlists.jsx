@@ -9,7 +9,40 @@ var Playlists = React.createClass({
 
   // GET THE INITIAL STATE
   getInitialState() {
-  	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: []}
+  	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: [], albumPicture: ""}
+  },
+
+  // COMPONENT DID MOUNT
+  componentDidMount() {
+
+  	// NAVBAR CHANGE COLOR
+		window.onscroll = function() {
+			myFunction()
+		};
+
+		function myFunction() {
+		    
+		    // IF YOU SCROLL DOWN PAST 500 PX, CHANGE THE NAVBAR TO WHITE
+		    if (document.body.scrollTop > 500) {
+		        var navbar = document.getElementsByClassName("navi");
+		        console.log(navbar)
+
+		        $('.appnav').css({'background-color':'white', 'height':'60px', 'color':'black'})
+		        $('.navlistitem').css({'color':'black'})
+		        $('#logo').css({'margin-top':'-15px'})
+		    } 
+
+		    // IF YOU SCROLL UP , CHANGE IT BACK TO TRANSPARENT
+		    else if (document.body.scrollTop < 500) {
+		        var navbar = document.getElementsByClassName("navi");
+		        console.log(navbar)
+
+		        $('.appnav').css({'background-color':'unset', 'height':'60px', 'color':'white', 'opacity':'inherit'})
+		        $('.navlistitem').css({'color':'white'})
+		    }	   
+
+		}
+
   },
   
   // HANDLE CHANGE
@@ -56,6 +89,18 @@ var Playlists = React.createClass({
   		}
   	})
 
+  	// AJAX CALL TO GET ALBUM PIC
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track',
+  		success: function(picdata) {
+  			console.log("Pic Data: ", picdata.tracks.items[0].album.images[0].url)
+
+  			var albumPic = picdata.tracks.items[0].album.images[0].url
+  			that.setState({albumPicture: albumPic})
+  			console.log(that.state.albumPicture)
+  		}
+  	})
+
   },
 
   render: function() {
@@ -80,8 +125,10 @@ var Playlists = React.createClass({
 						  	<p id="error">{this.state.invalidEntry}</p>
 
 							<p id="insts">Enter an Artist name and select a song to listen to!
-					  		<br />Filter your selections to get the latest tracks!
-					  	</p>
+					  			<br />Filter your selections to get the latest tracks!
+					  		</p>
+					  		<br/>
+					  		<img src={this.state.albumPicture} className="albumpic"/>
 					  </div>
 					  
 					  <div className="col-md-6">
