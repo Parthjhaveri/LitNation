@@ -20,7 +20,7 @@ var Navi = React.createClass({
 		        	<div className="row">
 					  
 						  <div className="col-md-4">						  	
-						  	<div id="logo"><span className="glyphicon glyphicon-fire"></span></div>
+						  	<Link to="/"><div id="logo"><span className="glyphicon glyphicon-fire"></span></div></Link>
 						  </div>
 						  
 						  <div className="col-md-4">
@@ -30,7 +30,7 @@ var Navi = React.createClass({
 						  <div className="col-md-4">
 
 						  	<ul className="navul">
-						  		<li className="navlistitem">Playlists</li>
+						  		<Link to="/playlists"><li className="navlistitem">Playlists</li></Link>
 						  		<li className="navlistitem">Favorites</li>
 						  		<li className="navlistitem">Radio</li>
 						  	</ul>

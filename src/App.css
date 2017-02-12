@@ -413,3 +413,14 @@ html, body {
   color: white;
   text-decoration: none;
 }
+
+a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.playlistscomponent {
+  width: auto;
+  height: 900px;
+  background-color: #1a1a1a;
+}

@@ -147,7 +147,7 @@ var Home = React.createClass({
 		        var navbar = document.getElementsByClassName("navi");
 		        console.log(navbar)
 
-		        $('.appnav').css({'background-color':'white', 'height':'60px', 'color':'black', 'opacity':'0.9'})
+		        $('.appnav').css({'background-color':'white', 'height':'60px', 'color':'black'})
 		        $('.navlistitem').css({'color':'black'})
 		        $('#logo').css({'margin-top':'-15px'})
 		    } 
