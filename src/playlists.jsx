@@ -30,8 +30,9 @@ var Playlists = React.createClass({
   	var that = this;
   	var artistInput = this.state.tracks;
   	
+  	// GETS ALL THE TRACKS BASED ON USER INPUT
   	$.ajax({
-  		url: 'https://api.spotify.com/v1/search?q=' + artistInput + ':nas&type=track',
+  		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track',
   		success: function(data) {
   			
   			console.log(data.tracks.items.map(function(key,val) {
@@ -41,7 +42,7 @@ var Playlists = React.createClass({
 
   			console.log(that.state.artistInfo)
 
-  			// ERROR HANDLING
+  			// ERROR HANDLING IF (TOTAL ITEMS RETURNED = 0)
   			if (data.tracks.total === 0) {
   				
   				var error = "Invalid entry, try again!";
