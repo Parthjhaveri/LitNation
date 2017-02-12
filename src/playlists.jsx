@@ -9,39 +9,39 @@ var Playlists = React.createClass({
 
   // GET THE INITIAL STATE
   getInitialState() {
-  	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: [], albumPicture: ""}
+  	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: [], albumPicture: "", albumName: "", selectedTracks: []}
   },
 
   // COMPONENT DID MOUNT
   componentDidMount() {
 
-  	// NAVBAR CHANGE COLOR
-		window.onscroll = function() {
-			myFunction()
-		};
+  // 	// NAVBAR CHANGE COLOR
+		// window.onscroll = function() {
+		// 	myFunction()
+		// };
 
-		function myFunction() {
+		// function myFunction() {
 		    
-		    // IF YOU SCROLL DOWN PAST 500 PX, CHANGE THE NAVBAR TO WHITE
-		    if (document.body.scrollTop > 500) {
-		        var navbar = document.getElementsByClassName("navi");
-		        console.log(navbar)
+		//     // IF YOU SCROLL DOWN PAST 500 PX, CHANGE THE NAVBAR TO WHITE
+		//     if (document.body.scrollTop > 500) {
+		//         var navbar = document.getElementsByClassName("navi");
+		//         console.log(navbar)
 
-		        $('.appnav').css({'background-color':'white', 'height':'60px', 'color':'black'})
-		        $('.navlistitem').css({'color':'black'})
-		        $('#logo').css({'margin-top':'-15px'})
-		    } 
+		//         $('.appnav').css({'background-color':'white', 'height':'60px', 'color':'black'})
+		//         $('.navlistitem').css({'color':'black'})
+		//         $('#logo').css({'margin-top':'-15px'})
+		//     } 
 
-		    // IF YOU SCROLL UP , CHANGE IT BACK TO TRANSPARENT
-		    else if (document.body.scrollTop < 500) {
-		        var navbar = document.getElementsByClassName("navi");
-		        console.log(navbar)
+		//     // IF YOU SCROLL UP , CHANGE IT BACK TO TRANSPARENT
+		//     else if (document.body.scrollTop < 500) {
+		//         var navbar = document.getElementsByClassName("navi");
+		//         console.log(navbar)
 
-		        $('.appnav').css({'background-color':'unset', 'height':'60px', 'color':'white', 'opacity':'inherit'})
-		        $('.navlistitem').css({'color':'white'})
-		    }	   
+		//         $('.appnav').css({'background-color':'unset', 'height':'60px', 'color':'white', 'opacity':'inherit'})
+		//         $('.navlistitem').css({'color':'white'})
+		//     }	   
 
-		}
+		// }
 
   },
   
@@ -69,7 +69,7 @@ var Playlists = React.createClass({
   	
   	// GETS ALL THE TRACKS BASED ON USER INPUT
   	$.ajax({
-  		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track',
+  		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track&limit=50',
   		success: function(data) {
   			
   			console.log("The Data that is getting rendered: ", data.tracks.items.map(function(key,val) {
@@ -93,11 +93,41 @@ var Playlists = React.createClass({
   	$.ajax({
   		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track',
   		success: function(picdata) {
-  			console.log("Pic Data: ", picdata.tracks.items[0].album.images[0].url)
+  			// console.log("Pic Data: ", picdata.tracks.items[0].album.images[0].url)
 
   			var albumPic = picdata.tracks.items[0].album.images[0].url
   			that.setState({albumPicture: albumPic})
-  			console.log(that.state.albumPicture)
+  			// console.log(that.state.albumPicture)
+  		}
+  	})
+
+  	// AJAX CALL TO GET ALBUM NAME
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track',
+  		success: function(namedata) {
+  			// console.log("Name Data: ", namedata.tracks.items[0].album.name)
+  			var albName = namedata.tracks.items[0].album.name;
+  			that.setState({albumName: albName})
+
+  		}
+  	})
+
+  },
+
+  // PLAY SELECTED SONG
+  playThisSong() {
+
+  	var that = this;
+
+  	// AJAX CALL TO PLAY SELECTED SONG
+  	$.ajax({
+  		url: 'https://api.spotify.com/v1/search?q=' + this.state.tracks + '&type=track&limit=50',
+  		success: function(sngdata) {
+  			console.log("Play selected song:", sngdata.tracks.items.map(function(key,val) {
+  				// return (that.setState({selectedTracks: that.state.selectedTracks.concat(key.external_urls.spotify)}));
+  				return key.external_urls.spotify
+
+  			}))
   		}
   	})
 
@@ -114,7 +144,7 @@ var Playlists = React.createClass({
 					  <div className="col-md-6">
 					  	
 
-					  	<h1 id="searchartist">Search for an Artist</h1>
+					  		<h1 id="searchartist">Search for an Artist</h1>
 					  		<br />
 						  	
 						  	<input type="text" placeholder="Artist name" id="searchartistinput" onChange={this.handleChange}/>
@@ -128,7 +158,12 @@ var Playlists = React.createClass({
 					  			<br />Filter your selections to get the latest tracks!
 					  		</p>
 					  		<br/>
-					  		<img src={this.state.albumPicture} className="albumpic"/>
+					  		<h2 className="titlealb">{this.state.albumName}<span className="glyphicon glyphicon-music" id="musicicon"></span></h2>
+					  		<br />
+					  		<br />	
+					  		<div className="hideimageborder">
+					  			<img src={this.state.albumPicture} className="albumpic"/>
+					  		</div>
 					  </div>
 					  
 					  <div className="col-md-6">
@@ -137,7 +172,13 @@ var Playlists = React.createClass({
 					  	<h1 className="title">Artist:</h1><h1 id="titlename">{this.state.tracks}</h1>
 					  	<hr id="boxhr" />
 					  		<ReactAudioPlayer
-								  src={null}
+								  src={
+								  		// // MAP OVER THE SELECTED TRACKS ARRAY TO PLAY WHICH EVER SONG IS CLICKED ON
+								  		// this.state.selectedTracks.map(function(key,val) {
+								  		// 	console.log(key)
+								  		// })
+								  		null
+								  }
 								  autoPlay
 								  className="trackplayer"
 								/>
@@ -146,9 +187,9 @@ var Playlists = React.createClass({
 					  			<ul className="tracksul">
 					  				{
 					  					this.state.artistInfo.map(function (key,val) {
-											return (<li id="songname" key={key} value={val}><span className="addtoplaylist">+</span>
-											<span className="glyphicon glyphicon-play" id="playsong"></span> {key}</li>)
-										})		
+											return (<li id="songname" key={key} value={val}><button className="addtoplaylist">+</button>
+											<button className="glyphicon glyphicon-play" id="playsong" onClick={this.playThisSong}></button> {key}</li>)
+										}, this)		
 					  				}
 					  			</ul>
 					  		</center>
