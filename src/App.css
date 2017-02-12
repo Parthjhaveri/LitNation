@@ -423,4 +423,45 @@ a:visited {
   width: auto;
   height: 900px;
   background-color: #1a1a1a;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#searchartist {
+  color: white;
+}
+
+#searchartistinput {
+  width: 250px;
+  height: 35px;
+  background-color: #1a1a1a;
+  border: 1px solid white;
+  border-radius: 20px;
+  text-align: center;
+  color: red;
+  font-size: 18px;  
+  font-weight: bolder;
+  display: inline-block;
+}
+
+input:focus {
+    outline:none;
+}
+
+button:focus {
+    outline:none;
+}
+
+#go {
+  width: 80px;
+  height: 35px;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  border: 1px solid red;
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  display: inline-block;
+  margin-left: 20px;
+  font-size: 18px;  
 }

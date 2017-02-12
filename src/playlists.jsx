@@ -8,9 +8,27 @@ var Playlists = React.createClass({
 
   render: function() {
     return (
-      <div className="playlistscomponent">
-        	
-        	
+      <div>
+        <div className="playlistscomponent">
+           <div className="container">
+           		<center>
+           			<div className="row">
+					  
+					  <div className="col-md-6">
+					  	<h1 id="searchartist">Search for an Artist</h1>
+					  	<br />
+					  	<input type="text" placeholder="Artist name" id="searchartistinput" />
+					  	<button id="go">Go</button>
+					  </div>
+					  
+					  <div className="col-md-6">
+
+					  </div>
+
+					</div>
+           		</center>
+           </div>
+        </div>	
       </div>
     )
   }
