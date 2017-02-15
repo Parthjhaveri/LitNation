@@ -4,12 +4,16 @@ var $ = require('jquery');
 import CSS from './App.css';
 import { IndexRoute, Link, Router, Route, browserHistory } from 'react-router';
 import ReactAudioPlayer from 'react-audio-player';
+import SongPanel from './player.jsx'
+import SpotifyPlayer from 'react-spotify-player';
 
 var Playlists = React.createClass({
 
   // GET THE INITIAL STATE
   getInitialState() {
-  	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: [], albumPicture: "", albumName: "", selectedTracks: []}
+  	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: [], albumPicture: "", albumName: "", selectedTracks: [], currentTrack: "",
+  			spotifyArrayItem: [], thisTrack: "", tracksArray:[{name:"",link:""}], sngid: []
+  			}
   },
 
   // COMPONENT DID MOUNT
@@ -64,7 +68,7 @@ var Playlists = React.createClass({
   	var that = this;
   	var artistInput = this.state.tracks;
 
-  	console.log(artistInput)
+  	// console.log(artistInput)
 
   	
   	// GETS ALL THE TRACKS BASED ON USER INPUT
@@ -74,10 +78,11 @@ var Playlists = React.createClass({
   			
   			console.log("The Data that is getting rendered: ", data.tracks.items.map(function(key,val) {
   				// return that.state.artistInfo.concat(key.name)
-  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name)}));
+  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name), sngid: that.state.sngid.concat(key.id)}));
   			}))
 
   			// console.log(that.state.artistInfo)
+  			// console.log("Song ID:", that.state.sngid)
 
   			// ERROR HANDLING (IF TOTAL ITEMS RETURNED = 0)
   			if (data.tracks.total === 0) {
@@ -93,7 +98,7 @@ var Playlists = React.createClass({
   	$.ajax({
   		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track',
   		success: function(picdata) {
-  			// console.log("Pic Data: ", picdata.tracks.items[0].album.images[0].url)
+  			console.log("Pic Data: ", picdata)
 
   			var albumPic = picdata.tracks.items[0].album.images[0].url
   			that.setState({albumPicture: albumPic})
@@ -108,10 +113,8 @@ var Playlists = React.createClass({
   			// console.log("Name Data: ", namedata.tracks.items[0].album.name)
   			var albName = namedata.tracks.items[0].album.name;
   			that.setState({albumName: albName})
-
   		}
   	})
-
   },
 
   // PLAY SELECTED SONG
@@ -121,15 +124,15 @@ var Playlists = React.createClass({
 
   	// AJAX CALL TO PLAY SELECTED SONG
   	$.ajax({
-  		url: 'https://api.spotify.com/v1/search?q=' + this.state.tracks + '&type=track&limit=50',
+  		url: 'https://api.spotify.com/v1/search?q=' + that.state.tracks + '&type=track&limit=50',
   		success: function(sngdata) {
-  			console.log("Play selected song:", sngdata.tracks.items.map(function(key,val) {
-  				// return (that.setState({selectedTracks: that.state.selectedTracks.concat(key.external_urls.spotify)}));
-  				return key.external_urls.spotify
-
-  			}))
+  			return sngdata.tracks.items.map(function(key) {
+  				return that.setState({spotifyArrayItem: that.state.spotifyArrayItem.concat(key.external_urls.spotify)}, that) 			
+  			})
   		}
   	})
+
+  	// console.log(this.state.spotifyArrayItem)
 
   },
 
@@ -167,27 +170,32 @@ var Playlists = React.createClass({
 					  </div>
 					  
 					  <div className="col-md-6">
+
+					  	<SongPanel songprop= {this.tracks}/>
+
 					  	<div className="trackstable">
 
 					  	<h1 className="title">Artist:</h1><h1 id="titlename">{this.state.tracks}</h1>
 					  	<hr id="boxhr" />
-					  		<ReactAudioPlayer
-								  src={
-								  		// // MAP OVER THE SELECTED TRACKS ARRAY TO PLAY WHICH EVER SONG IS CLICKED ON
-								  		// this.state.selectedTracks.map(function(key,val) {
-								  		// 	console.log(key)
-								  		// })
-								  		null
-								  }
-								  autoPlay
-								  className="trackplayer"
-								/>
+					  		{
+					  			// this.state.spotifyArrayItem.forEach(function(song) {
+					  			// 	return this.setState({thisTrack: song})
+					  			// })
+					  		}
+					  		{
+
+					  	// 	<ReactAudioPlayer
+								//   src={this.state.tracksArray[0].link}
+								//   autoPlay
+								//   className="trackplayer"
+								// />
+					  		}
 					  	<h1 className="title">Tracks available: </h1>
 					  		<center>
 					  			<ul className="tracksul">
 					  				{
-					  					this.state.artistInfo.map(function (key,val) {
-											return (<li id="songname" key={key} value={val}><button className="addtoplaylist">+</button>
+					  					this.state.artistInfo.map(function (key) {
+											return (<li id="songname" key={key}><button className="addtoplaylist">+</button>
 											<button className="glyphicon glyphicon-play" id="playsong" onClick={this.playThisSong}></button> {key}</li>)
 										}, this)		
 					  				}
