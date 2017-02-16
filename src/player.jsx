@@ -25,10 +25,10 @@ var SongPanel = React.createClass({
       success: function(data) {
         // console.log("Player data:", data)
         
-        console.log(data.tracks.items.map(function(key) {
-          // return (that.setState({uris: that.state.uris.concat(key.uri)},that));
-          return key.uri;
-        }))
+        // console.log(data.tracks.items.map(function(key) {
+        //   // return (that.setState({uris: that.state.uris.concat(key.uri)},that));
+        //   return key.uri;
+        // }))
 
       }
 
@@ -36,7 +36,7 @@ var SongPanel = React.createClass({
   },
 
   render: function() {
-      console.log("URIs: ", this.state.uris)
+      // console.log("URIs: ", this.state.uris)
     
     // PROPERTIES FOR SPOTIFY PLAYER
     const view = 'list'; 

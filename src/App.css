@@ -647,3 +647,20 @@ button:focus {
   border: 1px solid white;
   border-radius: 10px;
 }
+
+#songlink {
+  color: white;
+}
+
+#songlink:hover {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+

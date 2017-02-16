@@ -12,7 +12,7 @@ var Playlists = React.createClass({
   // GET THE INITIAL STATE
   getInitialState() {
   	return {tracks: "", artistName: "", artistInfo: [], invalidEntry: "", keyinfo: [], albumPicture: "", albumName: "", selectedTracks: [], currentTrack: "",
-  			spotifyArrayItem: [], thisTrack: "", tracksArray:[{name:"",link:""}], sngid: []
+  			spotifyArrayItem: [], thisTrack: "", tracksArray:[{name:"",link:""}], sngid: [], urlArr: [], songUrl: [], songString: []
   			}
   },
 
@@ -76,13 +76,21 @@ var Playlists = React.createClass({
   		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track&limit=50',
   		success: function(data) {
   			
-  			console.log("The Data that is getting rendered: ", data.tracks.items.map(function(key,val) {
+  			return data.tracks.items.map(function(key,val) {
   				// return that.state.artistInfo.concat(key.name)
-  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name), sngid: that.state.sngid.concat(key.id)}));
-  			}))
+  				// return (that.setState({artistInfo: that.state.artistInfo.concat(key.name), songString: that.state.songString.concat(key.external_urls.spotify)}));
+  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name)}));
+
+  				// FOR IN LOOP TO DIG INTO THE SPOTIFY OBJECT AND ISOLATE THE KEYS
+  				for (var key in key.external_urls.spotify) {
+				  if (key.external_urls.spotify.hasOwnProperty(key)) {
+				    that.setState({songString: that.state.songString.concat(key.external_urls[key])})
+				  }
+				}
+
+  			})
 
   			// console.log(that.state.artistInfo)
-  			// console.log("Song ID:", that.state.sngid)
 
   			// ERROR HANDLING (IF TOTAL ITEMS RETURNED = 0)
   			if (data.tracks.total === 0) {
@@ -120,19 +128,19 @@ var Playlists = React.createClass({
   // PLAY SELECTED SONG
   playThisSong() {
 
-  	var that = this;
+  	// var that = this;
+  	// var storeSongs = ""
 
-  	// AJAX CALL TO PLAY SELECTED SONG
-  	$.ajax({
-  		url: 'https://api.spotify.com/v1/search?q=' + that.state.tracks + '&type=track&limit=50',
-  		success: function(sngdata) {
-  			return sngdata.tracks.items.map(function(key) {
-  				return that.setState({spotifyArrayItem: that.state.spotifyArrayItem.concat(key.external_urls.spotify)}, that) 			
-  			})
-  		}
-  	})
-
-  	// console.log(this.state.spotifyArrayItem)
+  	// // AJAX CALL TO PLAY SELECTED SONG
+  	// $.ajax({
+  	// 	url: 'https://api.spotify.com/v1/search?q=' + that.state.tracks + '&type=track&limit=50',
+  	// 	success: function(sngdata) {
+  	// 		return sngdata.tracks.items.map(function(key) {
+  	// 			// console.log(key.external_urls.spotify)
+  	// 			console.log(storeSongs.concat(key.external_urls.spotify))
+  	// 		})
+  	// 	}
+  	// })
 
   },
 
@@ -196,7 +204,7 @@ var Playlists = React.createClass({
 					  				{
 					  					this.state.artistInfo.map(function (key) {
 											return (<li id="songname" key={key}><button className="addtoplaylist">+</button>
-											<button className="glyphicon glyphicon-play" id="playsong" onClick={this.playThisSong}></button> {key}</li>)
+											<a id="songlink" href={this.state.songString} target="_blank"><button className="glyphicon glyphicon-play" id="playsong" onClick={this.playThisSong}></button></a>{key}</li>)
 										}, this)		
 					  				}
 					  			</ul>
