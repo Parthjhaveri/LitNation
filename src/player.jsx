@@ -6,7 +6,7 @@ import { IndexRoute, Link, Router, Route, browserHistory } from 'react-router';
 import ReactAudioPlayer from 'react-audio-player';
 import SpotifyPlayer from 'react-spotify-player';
 import Playlists from './playlists.jsx'
-
+// import StudyMusic from './studymusic.jsx'
 
 var SongPanel = React.createClass({
 

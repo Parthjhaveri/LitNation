@@ -6,6 +6,7 @@ import { IndexRoute, Link, Router, Route, browserHistory } from 'react-router';
 import ReactAudioPlayer from 'react-audio-player';
 import SongPanel from './player.jsx'
 import SpotifyPlayer from 'react-spotify-player';
+// import StudyMusic from './studymusic.jsx'
 
 var Playlists = React.createClass({
 
@@ -76,19 +77,11 @@ var Playlists = React.createClass({
   		url: 'https://api.spotify.com/v1/search?q=' + artistInput + '&type=track&limit=50',
   		success: function(data) {
   			
-  			return data.tracks.items.map(function(key,val) {
+  			console.log("The Data that is getting rendered: ", data.tracks.items.map(function(key,val) {
   				// return that.state.artistInfo.concat(key.name)
   				// return (that.setState({artistInfo: that.state.artistInfo.concat(key.name), songString: that.state.songString.concat(key.external_urls.spotify)}));
-  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name)}));
-
-  				// FOR IN LOOP TO DIG INTO THE SPOTIFY OBJECT AND ISOLATE THE KEYS
-  				for (var key in key.external_urls.spotify) {
-				  if (key.external_urls.spotify.hasOwnProperty(key)) {
-				    that.setState({songString: that.state.songString.concat(key.external_urls[key])})
-				  }
-				}
-
-  			})
+  				return (that.setState({artistInfo: that.state.artistInfo.concat(key.name), songString: that.state.songString.concat(key.external_urls.spotify)}));		
+  			}))
 
   			// console.log(that.state.artistInfo)
 

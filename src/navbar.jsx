@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 import CSS from './App.css';
 import { IndexRoute,Link, Router, Route, browserHistory } from 'react-router';
-
+// import StudyMusic from './studymusic.jsx'
 var Navi = React.createClass({
   
   componentDidMount() {
@@ -31,8 +31,7 @@ var Navi = React.createClass({
 
 						  	<ul className="navul">
 						  		<Link to="/playlists"><li className="navlistitem">Playlists</li></Link>
-						  		<li className="navlistitem">Favorites</li>
-						  		<li className="navlistitem">Radio</li>
+						  		<Link to="/studymusic"><li className="navlistitem">Study music</li></Link>
 						  	</ul>
 
 						  </div>
