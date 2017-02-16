@@ -283,8 +283,8 @@ var Home = React.createClass({
 	        			<center><p id="subheading">A Music App that lets you organize your favorite songs,<br /> stream live Radio and get LAF!</p></center>
 	        			
 	        			<center>
-	        				<button className="login">Login</button>
-	        				<button className="signup">Sign up</button>
+	        				<button className="login">Playlists</button>
+	        				<button className="signup">Study music</button>
 	        			</center>
 
 	        			<center><span className="glyphicon glyphicon-menu-down" id="arr"></span></center>

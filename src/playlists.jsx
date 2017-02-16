@@ -84,6 +84,15 @@ var Playlists = React.createClass({
   			}))
 
   			// console.log(that.state.artistInfo)
+  			console.log("Song string: ", that.state.songString)
+
+  			// FOR IN LOOP TO EXTRACT ALL THE STRINGS ---------------------
+  			for (var key in that.state.songString) {
+			  if (that.state.songString.hasOwnProperty(key)) {
+			    console.log("String keys: ", that.state.songString[key]);
+			  }
+			}
+			// ------------------------------------------------------------
 
   			// ERROR HANDLING (IF TOTAL ITEMS RETURNED = 0)
   			if (data.tracks.total === 0) {
